@@ -10,9 +10,9 @@ public class World extends Observable {
     private Thread thread;
     private boolean notOver;
     private long delayed = 500;
-    private int enemyCount = 10;
-
+    private int enemyCount = 50;
     private Enemy [] enemies;
+    private Enemy [] enemiesStart;
 
     public World(int size) {
         this.size = size;
@@ -23,11 +23,16 @@ public class World extends Observable {
         for(int i = 0; i < enemies.length; i++) {
             enemies[i] = new Enemy(random.nextInt(size), random.nextInt(size));
         }
+        enemiesStart = enemies;
+        // enemies[enemies.length] = new Enemy((size/2), (size/2)+2);
     }
 
     public void start() {
         player.reset();
         player.setPosition(size/2, size/2);
+        for(int i = 0; i < enemies.length; i++) {
+            enemies[i].setPosition(enemiesStart[i].getX(), enemiesStart[i].getY());
+        }
         tick = 0;
         notOver = true;
         thread = new Thread() {
@@ -36,6 +41,9 @@ public class World extends Observable {
                 while(notOver) {
                     tick++;
                     player.move();
+                    for(int i = 0; i < enemies.length; i++) {
+                        enemies[i].moveEnermy();
+                    }
                     checkCollisions();
                     setChanged();
                     notifyObservers();

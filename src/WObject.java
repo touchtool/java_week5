@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public abstract class WObject {
 
     private int x;
@@ -5,6 +7,7 @@ public abstract class WObject {
 
     private int dx;
     private int dy;
+    // Random random = new Random();
 
     public WObject() {
     }
@@ -38,6 +41,19 @@ public abstract class WObject {
         this.x += dx;
         this.y += dy;
     }
+
+    public void moveEnermy() {
+        this.x += 1;
+        this.y += 1;
+    }
+
+    // public void moveEnermy(int maxX) {
+    //     int move = 1;
+    //     if (this.x == maxX) {
+    //         move *= -1;
+    //     }
+    //     this.x += move;
+    // }
 
     public int getX() {
         return x;
