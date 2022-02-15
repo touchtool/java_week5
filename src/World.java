@@ -10,7 +10,7 @@ public class World extends Observable {
     private Thread thread;
     private boolean notOver;
     private long delayed = 500;
-    private int enemyCount = 50;
+    private int enemyCount = 10;
     private Enemy [] enemies;
     private Enemy [] enemiesStart;
 
@@ -19,11 +19,14 @@ public class World extends Observable {
         tick = 0;
         player = new Player(size/2, size/2);
         enemies = new Enemy[enemyCount];
+        enemiesStart = new Enemy[enemyCount];
         Random random = new Random();
         for(int i = 0; i < enemies.length; i++) {
-            enemies[i] = new Enemy(random.nextInt(size), random.nextInt(size));
+            int x = random.nextInt(size);
+            int y = random.nextInt(size);
+            enemies[i] = new Enemy(x, y);
+            enemiesStart[i] = new Enemy(x, y);
         }
-        enemiesStart = enemies;
         // enemies[enemies.length] = new Enemy((size/2), (size/2)+2);
     }
 
@@ -42,7 +45,7 @@ public class World extends Observable {
                     tick++;
                     player.move();
                     for(int i = 0; i < enemies.length; i++) {
-                        enemies[i].moveEnermy();
+                        enemies[i].moveStalkerEnermy(player.getX(), player.getY(), tick);
                     }
                     checkCollisions();
                     setChanged();

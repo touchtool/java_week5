@@ -1,5 +1,3 @@
-import java.util.concurrent.ThreadLocalRandom;
-
 public abstract class WObject {
 
     private int x;
@@ -42,18 +40,23 @@ public abstract class WObject {
         this.y += dy;
     }
 
-    public void moveEnermy() {
-        this.x += 1;
-        this.y += 1;
+    public void moveStalkerEnermy(int disX, int disY, int tick) {
+        if (tick % 2 == 0) {
+            if (this.x < disX && this.y < disY) {
+                this.x += 1;
+                this.y += 1;
+            } else if (this.x < disX && this.y > disY) {
+                this.x += 1;
+                this.y -= 1;
+            } else if (this.x > disX && this.y < disY) {
+                this.x -= 1;
+                this.y += 1;
+            } else if (this.x > disX && this.y > disY) {
+                this.x -= 1;
+                this.y -= 1;
+            } 
+        }
     }
-
-    // public void moveEnermy(int maxX) {
-    //     int move = 1;
-    //     if (this.x == maxX) {
-    //         move *= -1;
-    //     }
-    //     this.x += move;
-    // }
 
     public int getX() {
         return x;
