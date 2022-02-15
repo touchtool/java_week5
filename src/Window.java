@@ -166,6 +166,10 @@ public class Window extends JFrame implements Observer {
                 Command c = new CommandTurnEast(world.getPlayer(), world.getTick());
                 c.execute();
                 replays.add(c);
+            } else if(e.getKeyCode() == KeyEvent.VK_Z){
+                Command c = new CommandTeleport(world.getPlayer(), world.getTick(), world.getSize());
+                c.execute();
+                replays.add(c);
             }
         }
     }
