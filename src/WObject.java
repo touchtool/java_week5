@@ -5,6 +5,7 @@ public abstract class WObject {
 
     private int dx;
     private int dy;
+    // Random random = new Random();
 
     public WObject() {
     }
@@ -37,6 +38,24 @@ public abstract class WObject {
     public void move() {
         this.x += dx;
         this.y += dy;
+    }
+
+    public void moveStalkerEnermy(int disX, int disY, int tick) {
+        if (tick % 2 == 0) {
+            if (this.x < disX && this.y < disY) {
+                this.x += 1;
+                this.y += 1;
+            } else if (this.x < disX && this.y > disY) {
+                this.x += 1;
+                this.y -= 1;
+            } else if (this.x > disX && this.y < disY) {
+                this.x -= 1;
+                this.y += 1;
+            } else if (this.x > disX && this.y > disY) {
+                this.x -= 1;
+                this.y -= 1;
+            } 
+        }
     }
 
     public int getX() {
