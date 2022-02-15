@@ -54,6 +54,14 @@ public abstract class WObject {
             } else if (this.x > disX && this.y > disY) {
                 this.x -= 1;
                 this.y -= 1;
+            } else if (this.x == disX && this.y > disY) {
+                this.y -= 1;
+            } else if (this.x == disX && this.y < disY) {
+                this.y += 1;
+            } else if (this.x > disX && this.y == disY) {
+                this.x -= 1;
+            } else if (this.x < disX && this.y == disY) {
+                this.x += 1;
             } 
         }
     }
